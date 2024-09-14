@@ -1,0 +1,16 @@
+{
+  "name": "typeface-poppins",
+  "version": "1.1.13",
+  "description": "Poppins typeface",
+  "main": "index.css",
+  "keywords": [
+    "typeface",
+    "font",
+    "font family",
+    "google fonts",
+    "poppins"
+  ],
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/KyleAMathews/typefaces/tree/master/packages/poppins"
+}
