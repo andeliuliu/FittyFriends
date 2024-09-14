@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@tryterra/terra-ui": "^0.2.0"
+  }
+}
