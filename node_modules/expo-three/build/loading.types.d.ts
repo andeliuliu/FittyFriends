@@ -1,2 +1,0 @@
-export type ProgressCallback = (xhr: XMLHttpRequest) => void;
-//# sourceMappingURL=loading.types.d.ts.map
