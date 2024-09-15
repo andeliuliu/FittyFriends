@@ -9,6 +9,7 @@ import ShopScreen from './screens/ShopScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ChallengesScreen from './screens/ChallengesScreen';
 import PetCustomizationScreen from './screens/PetCustomizationScreen';
+import GeneratePetScreen from './screens/GeneratePetScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
@@ -20,13 +21,18 @@ function CollectionStackScreen() {
       <CollectionStack.Screen
         name="Collection"
         component={CollectionScreen}
-        options={{ headerShown: false }} // Hide header for CollectionScreen
+        options={{ headerShown: false }}
       />
       <CollectionStack.Screen
         name="PetCustomization"
         component={PetCustomizationScreen}
-        options={{ headerShown: false }} // Hide header for PetCustomizationScreen
+        options={{ headerShown: false }}
       />
+      {/* <CollectionStack.Screen
+        name="GeneratePetScreen"
+        component={GeneratePetScreen}
+        options={{ headerShown: false }}
+      /> */}
     </CollectionStack.Navigator>
   );
   } 
