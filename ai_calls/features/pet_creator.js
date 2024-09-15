@@ -9,13 +9,14 @@ const openai = new OpenAI({
 });
 
 async function makePet(attributes) {
-    const emotions = ['very happy', 'slightly unhappy', 'very sad'];
+    const emotions = ['very happy', 'slightly unhappy', 'sad'];
     const imageUrls = [];
 
     for (let emotion of emotions) {
-        const prompt = `Using these details, make an adorable pet: ${attributes}. 
+        const prompt = `Using these details, make an adorable cartoon pet: ${attributes}. 
                         It should have a ${emotion} expression. 
-                        The pet should be facing the viewer and should fit perfectly within the frame of the image.`;
+                        The pet should be facing the viewer and should fit perfectly within the frame of the image.
+                        It should just be the pet itself, nothing else.`;
 
         const response = await openai.images.generate({
             model: "dall-e-3",
@@ -55,4 +56,4 @@ async function removeBg(imageURL) {
   }
 }
 
-makePet("A red dragon with blue eyes")
+makePet("rockstar dolphin with claws")
