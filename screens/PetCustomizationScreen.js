@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#743FF2', // Deep purple for the title
     marginBottom: 20,
+    marginTop: 60,
   },
   petContainer: {
     alignItems: 'center',

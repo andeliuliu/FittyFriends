@@ -15,12 +15,20 @@ const Tab = createBottomTabNavigator();
 const CollectionStack = createNativeStackNavigator();
 
 function CollectionStackScreen() {
-    return (
-      <CollectionStack.Navigator>
-        <CollectionStack.Screen name="Collection" component={CollectionScreen} />
-        <CollectionStack.Screen name="PetCustomization" component={PetCustomizationScreen} />
-      </CollectionStack.Navigator>
-    );
+  return (
+    <CollectionStack.Navigator>
+      <CollectionStack.Screen
+        name="Collection"
+        component={CollectionScreen}
+        options={{ headerShown: false }} // Hide header for CollectionScreen
+      />
+      <CollectionStack.Screen
+        name="PetCustomization"
+        component={PetCustomizationScreen}
+        options={{ headerShown: false }} // Hide header for PetCustomizationScreen
+      />
+    </CollectionStack.Navigator>
+  );
   } 
 
 // Main App
@@ -30,11 +38,10 @@ export default function App() {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
-          headerShown: false, // Hide the top bar
+          headerShown: false, 
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            // Assign icons based on the route name
             if (route.name === 'Home') {
               iconName = 'home-outline'; // Home icon
             } else if (route.name === 'Collection') {
