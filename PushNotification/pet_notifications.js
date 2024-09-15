@@ -3,9 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
+const openai = new OpenAI();
 
 export async function happyNotification(personality, task, pet) {
 
@@ -154,4 +152,3 @@ export async function nowLeavingNotification(personality, task, pet) {
     console.log(response.choices[0].message['content'])
     return response.choices[0].message['content'];
 }
-

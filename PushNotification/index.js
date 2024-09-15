@@ -7,10 +7,34 @@ import {
     verySadNotification,
     gonnaLeaveNotification,
     nowLeavingNotification
-} from './notifications.js';  // Adjust the path if necessary
+} from './pet_notifications.js';  // Adjust the path if necessary
 
 const app = express();
 app.use(bodyParser.json());
+const port = 3005;
+
+app.post('/happy-notification', async (req, res) => {
+    const { personality, task, pet } = req.body;
+    try {
+        const result = await happyNotification(personality, task, pet);
+        res.json({ notification: result });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/neutral-notification', async (req, res) => {
+    const { personality, task, pet } = req.body;
+    const result = await neutralNotification(personality, task, pet);
+    res.json({ notification: result });
+});
+
+app.post('/sad-notification', async (req, res) => {
+    const { personality, task, pet } = req.body;
+    const result = await sadNotification(personality, task, pet);
+    res.json({ notification: result });
+});
+
 
 app.post('/send-notification', async (req, res) => {
     const { pet_id } = req.body;
