@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 /.env
 /node_modules/
 /.DS_Store
+=======
+.env
+>>>>>>> 59dcd9c0 (fetching filtered data)
