@@ -57,3 +57,5 @@ async function removeBg(imageURL) {
 }
 
 makePet("rockstar dolphin with claws")
+
+
