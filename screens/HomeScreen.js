@@ -40,7 +40,7 @@ export default function HomeScreen() {
 
   return (
     <ImageBackground
-      source={require('../assets/background.png')} // Background image path
+      source={require('../assets/bbbb.png')} // Background image path
       style={styles.background}
       imageStyle={{ resizeMode: 'cover', blurRadius: 1 }}
     >
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   frontRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: -180,
+    marginBottom: 160,
   },
   backRow: {
     flexDirection: 'row',

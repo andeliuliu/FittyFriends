@@ -18,11 +18,11 @@ export default function PersonalizeScreen() {
   // Timer effect, counting up to 15 seconds
   useEffect(() => {
     let interval;
-    if (generating && timer < 15) {
+    if (generating && timer < 5) {
       interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer + 0.1);
       }, 100);
-    } else if (timer >= 15) {
+    } else if (timer >= 5) {
       clearInterval(interval);
       setGenerating(false);
       setAdoptModalVisible(true); // Show the adopt modal after 15 seconds
@@ -66,7 +66,7 @@ export default function PersonalizeScreen() {
 
       {/* Display the timer */}
       {generating && (
-        <Text style={styles.timerText}>{(timer).toFixed(1)}/15.0 seconds</Text>
+        <Text style={styles.timerText}>{(timer).toFixed(1)}/5.0 seconds</Text>
       )}
 
       {/* Adopt Modal */}
