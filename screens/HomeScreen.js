@@ -3,31 +3,36 @@ import { View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity, Anima
 
 export default function HomeScreen() {
   const [dropAnim] = useState(new Animated.Value(0)); // Animation state for cookie drop
+  const [activeTreat, setActiveTreat] = useState(null); // Track which treat is dropping
   const [bubbleVisible, setBubbleVisible] = useState(true); // Track if the bubble is visible
-  const [cookieDropped, setCookieDropped] = useState(false); // Track if the cookie has dropped
-  const [showDroppingCookie, setShowDroppingCookie] = useState(false); // Track if the dropping cookie is visible
 
-  // Handle tapping the bubble
-  const handleBubbleTap = () => {
-    if (!cookieDropped) {
-      setShowDroppingCookie(true); // Show the dropping cookie
-      setBubbleVisible(false); // Hide the bubble immediately after tap
+  // Treats mapped to each pet
+  const treats = [
+    { id: 'pet1', emoji: '🍪', pet: 'pet1.png' }, // Cookie
+    { id: 'pet2', emoji: '🦴', pet: 'pet2.png' }, // Bone
+    { id: 'pet3', emoji: '🍰', pet: 'pet3.png' }, // Cake
+    { id: 'pet4', emoji: '🥗', pet: 'pet4.png' }, // Salad
+    { id: 'pet5', emoji: '🥐', pet: 'pet5.png' }, // Croissant
+  ];
 
-      // Start the cookie drop animation
+  // Handle tapping the treat emoji
+  const handleTreatTap = (treat) => {
+    if (!activeTreat) {
+      setActiveTreat(treat.id); // Set the active treat for the animation
+
+      // Start the treat drop animation
       Animated.timing(dropAnim, {
         toValue: 1, // Final drop position
         duration: 2000,
         useNativeDriver: true,
       }).start(() => {
-        // Once the animation is done, hide the dropping cookie
-        setCookieDropped(true);
-        setShowDroppingCookie(false);
+        setActiveTreat(null); // Reset after animation
         dropAnim.setValue(0); // Reset animation for future interactions
       });
     }
   };
 
-  // Interpolate the drop position for the cookie
+  // Interpolate the drop position for the treat
   const dropTranslateY = dropAnim.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 200], // Adjust to control the drop distance
@@ -39,26 +44,34 @@ export default function HomeScreen() {
       style={styles.background}
       imageStyle={{ resizeMode: 'cover', blurRadius: 1 }}
     >
-      {/* Bubble with Cookie Emoji (only visible before tap) */}
-      {bubbleVisible && (
-        <TouchableOpacity onPress={handleBubbleTap} style={styles.bubbleContainer}>
-          <View style={styles.bubble}>
-            <Text style={styles.cookieEmoji}>🍪</Text>
-          </View>
-        </TouchableOpacity>
-      )}
+      {/* Treats positioned above each pet */}
+      <View style={styles.treatContainer}>
+        {treats.map((treat, index) => (
+          <TouchableOpacity key={treat.id} onPress={() => handleTreatTap(treat)} style={styles.treatBubble}>
+            <Text style={styles.treatEmoji}>{treat.emoji}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
       {/* Pet Display Area */}
       <View style={styles.petDisplay}>
-        <Image
-          source={require('../assets/pet.png')}  // Placeholder for pet image or 3D model
-          style={styles.petImage}
-        />
-        
-        {/* Dropping Cookie animation */}
-        {showDroppingCookie && (
-          <Animated.View style={[styles.cookieDrop, { transform: [{ translateY: dropTranslateY }] }]}>
-            <Text style={styles.cookieEmoji}>🍪</Text>
+        {/* Back Row (3 pets) */}
+        <View style={styles.backRow}>
+          <Image source={require('../assets/pet3.png')} style={styles.petImageSmall} />
+          <Image source={require('../assets/pet4.png')} style={styles.petImageSmall} />
+          <Image source={require('../assets/pet5.png')} style={styles.petImageSmall} />
+        </View>
+
+        {/* Front Row (2 pets) */}
+        <View style={styles.frontRow}>
+          <Image source={require('../assets/pet.png')} style={styles.petImageLarge} />
+          <Image source={require('../assets/pet2.png')} style={styles.petImageLarge} />
+        </View>
+
+        {/* Dropping Treat animation */}
+        {activeTreat && (
+          <Animated.View style={[styles.treatDrop, { transform: [{ translateY: dropTranslateY }] }]}>
+            <Text style={styles.treatEmoji}>{treats.find(treat => treat.id === activeTreat).emoji}</Text>
           </Animated.View>
         )}
       </View>
@@ -72,23 +85,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bubbleContainer: {
+  treatContainer: {
     position: 'absolute',
-    top: 100,
+    top: 150, // Position the treats 50px above pets
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '80%', // Spacing for the treats
+  },
+  treatBubble: {
+    width: 50,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bubble: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#FFEAEC',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: '#F5B041',
-    borderWidth: 3,
-  },
-  cookieEmoji: {
+  treatEmoji: {
     fontSize: 40,
   },
   petDisplay: {
@@ -97,14 +107,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 310,
   },
-  petImage: {
-    width: 200,
-    height: 200,
+  frontRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: -180,
+  },
+  backRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 0,
+  },
+  petImageSmall: {
+    width: 100,
+    height: 100,
     resizeMode: 'contain',
   },
-  cookieDrop: {
+  petImageLarge: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+  },
+  treatDrop: {
     position: 'absolute',
-    top: 0,
+    top: 150, // Same position as the treat container
     justifyContent: 'center',
     alignItems: 'center',
   },

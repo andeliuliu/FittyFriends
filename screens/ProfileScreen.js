@@ -33,7 +33,7 @@ export default function ProfileScreen() {
       <View style={styles.profileHeader}>
         {/* Profile Picture */}
         <Image
-          source={require('../assets/pet.png')} // Add a placeholder image in assets
+          source={require('../assets/pet.png')}
           style={styles.profilePic}
         />
 
@@ -72,7 +72,7 @@ export default function ProfileScreen() {
           {friendResults.map((friend, index) => (
             <View key={index} style={styles.resultItem}>
               <Image
-                source={require('../assets/pet.png')} // Use pet.png as profile pic for friends
+                source={require('../assets/pet5.png')}
                 style={styles.friendProfilePic}
               />
               <View style={styles.friendInfo}>
