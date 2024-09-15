@@ -10,10 +10,10 @@ export default function CollectionScreen() {
   // Simulated collection data with stats for each pet
   const collection = [
     { id: '1', name: 'Pet 1', image: require('../assets/pet.png'), stats: 'Calorie burn: 14,329 kcal' },
-    { id: '2', name: 'Pet 2', image: require('../assets/pet.png'), stats: 'Steps: 78,310' },
-    { id: '3', name: 'Pet 3', image: require('../assets/pet.png'), stats: 'Bench PR: 285 lbs' },
-    { id: '4', name: 'Pet 4', image: require('../assets/pet.png'), stats: 'Run: 130 miles at 7:22/mile' },
-    { id: '5', name: 'Pet 5', image: require('../assets/pet.png'), stats: 'AVG Daily Intake: 2,300 kcal, 160g protein' },
+    { id: '2', name: 'Pet 2', image: require('../assets/pet2.png'), stats: 'Steps: 78,310' },
+    { id: '3', name: 'Pet 3', image: require('../assets/pet3.png'), stats: 'Bench PR: 285 lbs' },
+    { id: '4', name: 'Pet 4', image: require('../assets/pet4.png'), stats: 'Run: 130 miles at 7:22/mile' },
+    { id: '5', name: 'Pet 5', image: require('../assets/pet5.png'), stats: 'AVG Daily Intake: 2,300 kcal, 160g protein' },
   ];
 
   // Handle pet selection and open the modal

@@ -6,10 +6,10 @@ export default function ShopScreen() {
   const shopItems = [
     { id: '1', name: 'Sombrero Hat', price: '10 Points', image: require('../assets/sombrero.png') },
     { id: '2', name: 'Sun Glasses', price: '10 Points', image: require('../assets/glasses.png') },
-    { id: '3', name: 'Golden Chain', price: '15 Points', image: require('../assets/pet.png') },
-    { id: '4', name: 'Air Jordans', price: '20 Points', image: require('../assets/pet.png') },
-    { id: '5', name: 'Pet 5', price: '20 Points', image: require('../assets/pet.png') },
-    { id: '6', name: 'Pet 6', price: '25 Points', image: require('../assets/pet.png') },
+    { id: '3', name: 'Golden Chain', price: '15 Points', image: require('../assets/chain.png') },
+    { id: '4', name: 'Air Jordans', price: '20 Points', image: require('../assets/jordans.png') },
+    { id: '5', name: 'Headphones', price: '20 Points', image: require('../assets/headphones.png') },
+    { id: '6', name: 'Gymshark Tee', price: '25 Points', image: require('../assets/merch.png') },
   ];
 
   const renderItem = ({ item }) => (
