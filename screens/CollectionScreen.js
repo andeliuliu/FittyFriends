@@ -7,13 +7,13 @@ export default function CollectionScreen() {
   const [selectedPet, setSelectedPet] = useState(null); // Track the selected pet for the modal
   const [modalVisible, setModalVisible] = useState(false); // Track modal visibility
 
-  // Simulated collection data (images should be added to your assets folder)
+  // Simulated collection data with stats for each pet
   const collection = [
-    { id: '1', name: 'Pet 1', image: require('../assets/pet.png') },
-    { id: '2', name: 'Pet 2', image: require('../assets/pet.png') },
-    { id: '3', name: 'Pet 3', image: require('../assets/pet.png') },
-    { id: '4', name: 'Pet 4', image: require('../assets/pet.png') },
-    { id: '5', name: 'Pet 5', image: require('../assets/pet.png') },
+    { id: '1', name: 'Pet 1', image: require('../assets/pet.png'), stats: 'Calorie burn: 14,329 kcal' },
+    { id: '2', name: 'Pet 2', image: require('../assets/pet.png'), stats: 'Steps: 78,310' },
+    { id: '3', name: 'Pet 3', image: require('../assets/pet.png'), stats: 'Bench PR: 285 lbs' },
+    { id: '4', name: 'Pet 4', image: require('../assets/pet.png'), stats: 'Run: 130 miles at 7:22/mile' },
+    { id: '5', name: 'Pet 5', image: require('../assets/pet.png'), stats: 'AVG Daily Intake: 2,300 kcal, 160g protein' },
   ];
 
   // Handle pet selection and open the modal
@@ -54,6 +54,7 @@ export default function CollectionScreen() {
               <>
                 <Image source={selectedPet.image} style={styles.modalPetImage} />
                 <Text style={styles.modalPetName}>{selectedPet.name}</Text>
+                <Text style={styles.modalPetStats}>{selectedPet.stats}</Text>
 
                 {/* Customize Button */}
                 <Button
@@ -157,6 +158,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     color: '#743FF2',
+    marginBottom: 10,
+  },
+  modalPetStats: {
+    fontSize: 16,
+    color: '#5B464B', // Darker color for stats
     marginBottom: 20,
+    textAlign: 'center',
   },
 });

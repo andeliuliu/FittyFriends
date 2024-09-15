@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, Button, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 export default function ProfileScreen() {
   // Simulating dynamic user data
   const [user, setUser] = useState({
-    name: 'Zhandos Ali',
+    name: '@andrew',
     status: 'Active Fitness Enthusiast',
     workouts: 128,
     petsCollected: 5,
@@ -17,8 +17,11 @@ export default function ProfileScreen() {
   // Simulate a search function
   const handleSearch = () => {
     // Example: Simulate friend search results
-    const results = ['John Doe', 'Jane Smith', 'David Johnson'].filter((friend) =>
-      friend.toLowerCase().includes(searchQuery.toLowerCase())
+    const results = [
+      { username: '@zhan', workouts: 75, pets: 4 },
+      { username: '@kuba', workouts: 101, pets: 6 },
+    ].filter((friend) =>
+      friend.username.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFriendResults(results);
   };
@@ -68,8 +71,17 @@ export default function ProfileScreen() {
         <View style={styles.resultsContainer}>
           {friendResults.map((friend, index) => (
             <View key={index} style={styles.resultItem}>
-              <Text>{friend}</Text>
-              <Button title="Add" onPress={() => Alert.alert(`${friend} added!`)} />
+              <Image
+                source={require('../assets/pet.png')} // Use pet.png as profile pic for friends
+                style={styles.friendProfilePic}
+              />
+              <View style={styles.friendInfo}>
+                <Text style={styles.friendUsername}>{friend.username}</Text>
+                <Text style={styles.friendStats}>
+                  Workouts: {friend.workouts} | Pets: {friend.pets}
+                </Text>
+              </View>
+              <Button title="Add" onPress={() => Alert.alert(`Friend request to ${friend.username} sent!`)} />
             </View>
           ))}
         </View>
@@ -84,84 +96,104 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#FFEAEC', // Main background color
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      paddingTop: 40,
-    },
-    profileHeader: {
-      alignItems: 'center',
-    },
-    profilePic: {
-      width: 120,
-      height: 120,
-      borderRadius: 60,
-      backgroundColor: '#FEDCE0', // Placeholder color
-      marginBottom: 20,
-    },
-    name: {
-      fontSize: 24,
-      color: '#743FF2', // Purple for the name
-      fontWeight: 'bold',
-    },
-    status: {
-      fontSize: 16,
-      color: '#5B464B', // Darker text for the status
-    },
-    statsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '90%',
-      backgroundColor: '#E4F6DB', // Light green background for stats
-      borderRadius: 20,
-      padding: 20,
-      elevation: 5, // For shadow effect
-    },
-    statBox: {
-      alignItems: 'center',
-    },
-    statNumber: {
-      fontSize: 28,
-      color: '#4F6152', // Dark green for numbers
-      fontWeight: 'bold',
-    },
-    statLabel: {
-      fontSize: 16,
-      color: '#5B464B', // Muted label color
-    },
-    searchBar: {
-        backgroundColor: '#E4F6DB', // Light green background for search bar
-        padding: 10,
-        borderRadius: 10,
-        borderColor: '#5B464B',
-        borderWidth: 1,
-        marginBottom: 20,
-        color: '#5B464B', // Darker text color
-      },
-      resultsContainer: {
-        marginTop: 20,
-      },
-      resultItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 10,
-        backgroundColor: '#FEDCE0', // Soft pink for result items
-        marginBottom: 10,
-        borderRadius: 10,
-      },
-    settingsButton: {
-      backgroundColor: '#D6B2F5', // Soft purple for the button
-      paddingVertical: 15,
-      paddingHorizontal: 40,
-      borderRadius: 30,
-      alignItems: 'center',
-      marginTop: 20,
-    },
-    settingsText: {
-      color: '#FFFFFF',
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#FFEAEC', // Main background color
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    paddingTop: 40,
+  },
+  profileHeader: {
+    alignItems: 'center',
+  },
+  profilePic: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#FEDCE0', // Placeholder color
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 24,
+    color: '#743FF2', // Purple for the name
+    fontWeight: 'bold',
+  },
+  status: {
+    fontSize: 16,
+    color: '#5B464B', // Darker text for the status
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+    backgroundColor: '#E4F6DB', // Light green background for stats
+    borderRadius: 20,
+    padding: 20,
+    elevation: 5, // For shadow effect
+  },
+  statBox: {
+    alignItems: 'center',
+  },
+  statNumber: {
+    fontSize: 28,
+    color: '#4F6152', // Dark green for numbers
+    fontWeight: 'bold',
+  },
+  statLabel: {
+    fontSize: 16,
+    color: '#5B464B', // Muted label color
+  },
+  searchBar: {
+    backgroundColor: '#E4F6DB', // Light green background for search bar
+    padding: 10,
+    borderRadius: 10,
+    borderColor: '#5B464B',
+    borderWidth: 1,
+    marginBottom: 20,
+    color: '#5B464B', // Darker text color
+  },
+  resultsContainer: {
+    marginTop: 20,
+    width: '90%', // Widen the results container
+  },
+  resultItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor: '#FEDCE0', // Soft pink for result items
+    marginBottom: 10,
+    borderRadius: 10,
+  },
+  friendProfilePic: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  friendInfo: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  friendUsername: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#743FF2', // Deep purple for the username
+  },
+  friendStats: {
+    fontSize: 14,
+    color: '#5B464B', // Darker color for stats
+  },
+  settingsButton: {
+    backgroundColor: '#D6B2F5', // Soft purple for the button
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 30,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  settingsText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
