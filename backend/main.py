@@ -1,11 +1,18 @@
 # Importing the API and instantiating the client using your keys
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from dotenv import load_dotenv
 import os
 import uvicorn
 from terra.base_client import Terra
 import requests
 from datetime import datetime
+from bson import ObjectId
+from schemas import list_serial, individual_serial
+import db
+from db import pets_collection
+from pets import Pet
+from route import router
+
 
 # Load environment variables
 load_dotenv()
@@ -17,6 +24,7 @@ terra = Terra(API_KEY, DEV_ID, SECRET)
 
 # Initialize FastAPI app
 app = FastAPI()
+app.include_router(router)
 
 def get_headers():
     return {
